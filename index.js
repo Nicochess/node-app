@@ -1,15 +1,12 @@
-const express = require('express')
+// __dirname -> gives the directory name of the file (full path)
+// __filename -> gives the full file name
 
-const app = express()
+const fs = require('fs');
+const path = require('path');
 
-app.get('/', (req, res) => {
-    res.send('Testing express')
+// Create a folder
+
+fs.mkdir(path.join(__dirname, 'Testing'), {}, err => {
+    if(err) throw err;
+    console.log("Folder created...")
 })
-
-app.post('/', (req, res) => {
-    res.send('Post response method')
-})
-
-const PORT = process.env.PORT || 3000
-
-app.listen(PORT, () => console.log(`Server started at port ${PORT}`))
