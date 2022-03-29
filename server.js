@@ -1,8 +1,12 @@
 const http = require('http')
 
 //Create server object
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     //Write response
-    res.write('Server is on.')
+    res.write('Server is responding 200.')
     res.end()
-}).listen(5000, () => console.log('Server is running...'))
+})
+
+const PORT = 5000;
+
+server.listen(PORT, console.log(`Server is listening on ${PORT} port.`))
