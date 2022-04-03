@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Nicochess/node-app/issues"
   },
-  "homepage": "https://github.com/Nicochess/node-app#readme"
+  "homepage": "https://github.com/Nicochess/node-app#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }

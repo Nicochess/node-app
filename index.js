@@ -1,12 +1,13 @@
-// __dirname -> gives the directory name of the file (full path)
-// __filename -> gives the full file name
+const express = require("express");
+const path = require("path");
 
-const fs = require('fs');
-const path = require('path');
+const app = express();
 
-// Create a folder
+//Set static folder
+app.use(express.static(path.join(__dirname, "public")));
 
-fs.mkdir(path.join(__dirname, 'Testing'), {}, err => {
-    if(err) throw err;
-    console.log("Folder created...")
-})
+app.use("/api/users", require('./routes/api/users'))
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Server is listening at ${PORT} port.`));
