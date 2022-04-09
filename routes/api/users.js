@@ -17,4 +17,8 @@ router.get("/:id", (req, res) => {
   }
 });
 
-module.exports = router
+router.post("/", (req, res) => {
+  res.send(res.body)
+});
+
+module.exports = router;
