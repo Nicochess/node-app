@@ -22,31 +22,45 @@ router.post("/", (req, res) => {
     id: uuid.v4(),
     name: req.body.name,
     email: req.body.email,
-    status: 'active'
-  }
+    status: "active",
+  };
 
-  if(!newMember.name || !newMember.email){
-    return res.status(400).json({ msg: 'Please include a name and email' })
+  if (!newMember.name || !newMember.email) {
+    return res.status(400).json({ msg: "Please include a name and email" });
   }
 
   users.push(newMember);
-  res.json(users)
+  res.json(users);
 });
 
 router.put("/:id", (req, res) => {
-  const found = users.some(user => user.id === parseInt(req.params.id))
+  const found = users.some((user) => user.id === parseInt(req.params.id));
 
   if (found) {
-    const updateUser = req.body
-    users.forEach(user => {
+    const updateUser = req.body;
+    users.forEach((user) => {
       if (user.id === parseInt(req.params.id)) {
-        user.name = updateUser.name ? updateUser.name : user.name
-        user.email = updateUser.email ? updateUser.email : user.email
+        user.name = updateUser.name ? updateUser.name : user.name;
+        user.email = updateUser.email ? updateUser.email : user.email;
       }
-    })
+      res.status(200).json({ msg: "User updated", user });
+    });
   } else {
-    res.status(404).json({msg: `There no user with id of ${req.params.id}`})
+    res.status(404).json({ msg: `There no user with id of ${req.params.id}` });
   }
-})
+});
+
+router.delete("/:id", (req, res) => {
+  const found = users.some((user) => user.id === parseInt(req.params.id));
+
+  if (found) {
+    res.json({
+      msg: "User deleted",
+      user: users.filter((user) => user.id === parseInt(req.params.id)),
+    });
+  } else {
+    res.status(400).json({ msg: `No user with id ${req.params.id}` });
+  }
+});
 
 module.exports = router;
