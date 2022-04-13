@@ -35,6 +35,18 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const found = users.some(user => user.id === parseInt(req.params.id))
+
+  if (found) {
+    const updateUser = req.body
+    users.forEach(user => {
+      if (user.id === parseInt(req.params.id)) {
+        user.name = updateUser.name ? updateUser.name : user.name
+        user.email = updateUser.email ? updateUser.email : user.email
+      }
+    })
+  } else {
+    res.status(404).json({msg: `There no user with id of ${req.params.id}`})
+  }
 })
 
 module.exports = router;
